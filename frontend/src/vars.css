@@ -1,0 +1,29 @@
+:root {
+    color-scheme: light dark;
+    --bright-blue: color-mix(in oklab, var(--python-blue), white 50%);
+    --python-blue: #3776a9;
+    --dark-blue: color-mix(in oklab, var(--python-blue), black 20%);
+    --darker-blue: color-mix(in oklab, var(--python-blue), black 45%);
+    --python-yellow: #ffd343;
+    --dark-yellow: color-mix(in oklab, var(--python-yellow), black 20%);
+    --fastapi-teal: #009485;
+    --dark-text: #444444;
+    --faint-shadow: #44444433;
+    --light-text: #f9f9f9;
+    --light-background: #f7f7f7;
+    --dark-background: #36393e;
+    --light-card: #ffffff;
+    --dark-card: #494c51;
+    --github-light-grey: #909090;
+    --github-dark-grey: #303030;
+
+    --closed-connection-red: #ff0000;
+}
+
+.theme-light {
+    color-scheme: light;
+}
+
+.theme-dark {
+    color-scheme: dark;
+}

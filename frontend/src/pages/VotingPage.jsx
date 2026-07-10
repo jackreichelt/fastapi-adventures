@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useWebSocket, { ReadyState } from 'react-use-websocket'
+import "./theme.css"
 
+import ConnectionIndicator from "../components/ConnectionIndicator"
 import VotingOptions from "../components/VotingOptions"
 import useSlide from "../hooks/use-get-slide"
 
@@ -21,11 +23,11 @@ function VotingPage() {
     }, [lastMessage])
 
     const connectionStatus = {
-        [ReadyState.CONNECTING]: 'Connecting',
-        [ReadyState.OPEN]: 'Open',
-        [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed',
-        [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+        [ReadyState.CONNECTING]: 'connecting',
+        [ReadyState.OPEN]: 'open',
+        [ReadyState.CLOSING]: 'closing',
+        [ReadyState.CLOSED]: 'closed',
+        [ReadyState.UNINSTANTIATED]: 'uninstantiated',
     }[readyState]
 
 
@@ -39,11 +41,9 @@ function VotingPage() {
 
     return (
         <div>
-            <h2>Voting: {slide.title}</h2>
+            <ConnectionIndicator status={connectionStatus} />
+            <h1>Voting: {slide.title}</h1>
             <div>
-                <p>
-                    Socket status: {connectionStatus}
-                </p>
                 <ul>
                     {messages && messages.map((message, key) => {
                         return (

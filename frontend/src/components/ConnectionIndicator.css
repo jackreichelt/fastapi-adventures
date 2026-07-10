@@ -1,0 +1,29 @@
+@import url("../vars.css");
+
+#connection-indicator {
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+
+    &.closed {
+        color: var(--closed-connection-red);
+    }
+
+    &.open {
+        color: var(--fastapi-teal);
+    }
+
+    &.uninstantiated {
+        color: violet;
+    }
+
+    &.closing {
+        color: orange;
+    }
+
+    &.connecting {
+        color: yellow;
+    }
+}

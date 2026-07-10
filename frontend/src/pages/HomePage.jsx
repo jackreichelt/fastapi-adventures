@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import "./HomePage.css"
+import "./theme.css"
 
 import { useState } from "react"
 import getResumeSession from "../api/get-resume-session"

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useWebSocket, { ReadyState } from 'react-use-websocket'
+import "./theme.css"
 
+import ConnectionIndicator from "../components/ConnectionIndicator"
 import PollOptions from "../components/PollOptions"
 import useGetSlide from "../hooks/use-get-slide"
 import useGetVotes from "../hooks/use-get-votes"
@@ -27,11 +29,11 @@ function SlidePage() {
     }, [lastMessage]) // TODO: Work out how to do this properly.
 
     const connectionStatus = {
-        [ReadyState.CONNECTING]: 'Connecting',
-        [ReadyState.OPEN]: 'Open',
-        [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed',
-        [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+        [ReadyState.CONNECTING]: 'connecting',
+        [ReadyState.OPEN]: 'open',
+        [ReadyState.CLOSING]: 'closing',
+        [ReadyState.CLOSED]: 'closed',
+        [ReadyState.UNINSTANTIATED]: 'uninstantiated',
     }[readyState]
 
     if (slideError || votesError) {
@@ -44,7 +46,8 @@ function SlidePage() {
 
     return (
         <div>
-            <h2>{slide.title}{sessionId && ` - ${sessionId}`}</h2>
+            <ConnectionIndicator status={connectionStatus} />
+            <h1>{slide.title}{sessionId && ` - ${sessionId}`}</h1>
             <ul>
                 {slide.contents.map((bulletPoint, key) => {
                     return (
@@ -55,9 +58,6 @@ function SlidePage() {
                 })}
             </ul>
             <div>
-                <p>
-                    Socket status: {connectionStatus}
-                </p>
                 <ul>
                     {messages && messages.map((message, key) => {
                         return (
