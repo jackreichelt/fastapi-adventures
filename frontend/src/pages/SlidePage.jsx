@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useWebSocket, { ReadyState } from 'react-use-websocket'
+
 import "./theme.css"
+
+import "./SlidePage.css"
 
 import ConnectionIndicator from "../components/ConnectionIndicator"
 import PollOptions from "../components/PollOptions"
+import TitleContent from "./TitleContent"
+
 import useGetSlide from "../hooks/use-get-slide"
 import useGetVotes from "../hooks/use-get-votes"
 
@@ -19,6 +24,12 @@ function SlidePage() {
     const { lastMessage, readyState } = useWebSocket(socketUrl)
     // TODO: If socket closes, re-connect
     const [messages, setMessages] = useState([])
+
+    const [debug, setDebug] = useState(false)
+
+    const toggleDebug = () => {
+        setDebug(!debug)
+    }
 
     useEffect(() => {
         if (lastMessage !== null) {
@@ -44,31 +55,54 @@ function SlidePage() {
         return (<p>loading...</p>)
     }
 
+    let slideContents = null
+    if (slide.contents.length === 0) {
+        if (slide.image === '') {
+            // console.log('Title slide')
+            slideContents = (
+                <TitleContent title={slide.title} />
+            )
+        } else {
+            console.log('Image slide')
+            slideContents = (
+                <div></div>
+            )
+        }
+    } else {
+        if (slide.image === '') {
+            console.log('Text slide')
+            slideContents = (
+                <div></div>
+            )
+        } else {
+            console.log('Text & image slide')
+            slideContents = (
+                <div></div>
+            )
+        }
+    }
+
+    // TODO: Add different components depending on the contents and image of the slide
     return (
-        <div>
-            <ConnectionIndicator status={connectionStatus} />
-            <h1>{slide.title}{sessionId && ` - ${sessionId}`}</h1>
-            <ul>
-                {slide.contents.map((bulletPoint, key) => {
-                    return (
-                        <li key={key}>
-                            {bulletPoint}
-                        </li>
-                    )
-                })}
-            </ul>
-            <div>
-                <ul>
-                    {messages && messages.map((message, key) => {
-                        return (
-                            <li key={key}>
-                                {message}
-                            </li>
-                        )
-                    })}
-                </ul>
+        <div className="slide">
+            <ConnectionIndicator status={connectionStatus} onClick={toggleDebug} />
+            {slideContents}
+            <div className="bottomContent">
+                {/* <DebugOutput display={debug} messages={messages} /> */}
+                {debug && (<div>
+                    <p>Debug messages:</p>
+                    <ul>
+                        {messages && messages.map((message, key) => {
+                            return (
+                                <li key={key}>
+                                    {message}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>)}
+                <PollOptions options={pollOptions} votesTally={votes} />
             </div>
-            <PollOptions options={pollOptions} votesTally={votes} />
         </div>
     )
 }
