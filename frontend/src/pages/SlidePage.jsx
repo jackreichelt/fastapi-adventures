@@ -12,6 +12,9 @@ import TitleContent from "./TitleContent"
 
 import useGetSlide from "../hooks/use-get-slide"
 import useGetVotes from "../hooks/use-get-votes"
+import ComboContent from "./ComboContent"
+import ImageContent from "./ImageContent"
+import TextContent from "./TextContent"
 
 function SlidePage() {
     const { id } = useParams()
@@ -33,10 +36,11 @@ function SlidePage() {
 
     useEffect(() => {
         if (lastMessage !== null) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
+
             setMessages((prevMessages) => prevMessages.concat(lastMessage.data))
             updateVotes(lastMessage.data)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lastMessage]) // TODO: Work out how to do this properly.
 
     const connectionStatus = {
@@ -58,26 +62,22 @@ function SlidePage() {
     let slideContents = null
     if (slide.contents.length === 0) {
         if (slide.image === '') {
-            // console.log('Title slide')
             slideContents = (
-                <TitleContent title={slide.title} />
+                <TitleContent slide={slide} />
             )
         } else {
-            console.log('Image slide')
             slideContents = (
-                <div></div>
+                <ImageContent slide={slide} />
             )
         }
     } else {
         if (slide.image === '') {
-            console.log('Text slide')
             slideContents = (
-                <div></div>
+                <TextContent slide={slide} />
             )
         } else {
-            console.log('Text & image slide')
             slideContents = (
-                <div></div>
+                <ComboContent slide={slide} />
             )
         }
     }
@@ -87,22 +87,21 @@ function SlidePage() {
         <div className="slide">
             <ConnectionIndicator status={connectionStatus} onClick={toggleDebug} />
             {slideContents}
-            <div className="bottomContent">
-                {/* <DebugOutput display={debug} messages={messages} /> */}
-                {debug && (<div>
-                    <p>Debug messages:</p>
-                    <ul>
-                        {messages && messages.map((message, key) => {
-                            return (
-                                <li key={key}>
-                                    {message}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>)}
-                <PollOptions options={pollOptions} votesTally={votes} />
-            </div>
+            {/* <DebugOutput display={debug} messages={messages} /> */}
+            {debug && (<div>
+                <p>Debug messages:</p>
+                <p>Session ID: {sessionId}</p>
+                <ul>
+                    {messages && messages.map((message, key) => {
+                        return (
+                            <li key={key}>
+                                {message}
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>)}
+            <PollOptions options={pollOptions} votesTally={votes} />
         </div>
     )
 }

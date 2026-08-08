@@ -3,7 +3,7 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 2rem;
+    padding: 0;
     background: light-dark(var(--light-background), var(--dark-background));
     color: light-dark(var(--dark-text), var(--light-text));
 }

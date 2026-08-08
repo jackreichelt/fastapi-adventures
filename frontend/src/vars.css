@@ -1,5 +1,5 @@
 :root {
-    /* color-scheme: light dark; */
+    color-scheme: light dark;
     --bright-blue: color-mix(in oklab, var(--python-blue), white 50%);
     --python-blue: #3776a9;
     --dark-blue: color-mix(in oklab, var(--python-blue), black 20%);
