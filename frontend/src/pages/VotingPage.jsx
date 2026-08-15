@@ -18,7 +18,7 @@ function VotingPage() {
     const { slide, isLoading: isSlideLoading, error: slideError, pollOptions } = useSlide(slideId)
     const { vote, isLoading: isVoteLoading, error: voteError } = useGetVote(audienceId, slideId, sessionId)
 
-    const socketUrl = `${import.meta.env.VITE_API_URL}/ws/v1/audience`
+    const socketUrl = `${import.meta.env.VITE_API_URL}ws/v1/audience`
     const { lastMessage, readyState } = useWebSocket(socketUrl)
     const [messages, setMessages] = useState([])
 

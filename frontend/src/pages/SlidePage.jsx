@@ -23,7 +23,7 @@ function SlidePage() {
     const { slide, slideLoading, slideError, pollOptions } = useGetSlide(slideId)
     const { votes, votesLoading, votesError, updateVotes } = useGetVotes(sessionId, slideId)
 
-    const socketUrl = `${import.meta.env.VITE_API_URL}/ws/v1/presenter`
+    const socketUrl = `${import.meta.env.VITE_API_URL}ws/v1/presenter`
     const { lastMessage, readyState } = useWebSocket(socketUrl)
     // TODO: If socket closes, re-connect
     const [messages, setMessages] = useState([])
