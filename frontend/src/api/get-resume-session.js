@@ -1,5 +1,5 @@
 export default async function getResumeSession(sessionId) {
-    const url = `${import.meta.env.VITE_API_URL}/api/v1/presentation-session/${sessionId}`
+    const url = `${import.meta.env.VITE_API_URL}/v1/presentation-session/${sessionId}`
 
     const response = await fetch(url, {
         method: "GET"

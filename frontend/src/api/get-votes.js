@@ -1,6 +1,6 @@
 export default async function getVotes(sessionId, slideId) {
     // Create our URL
-    const url = `${import.meta.env.VITE_API_URL}/api/v1/votes/${sessionId}/${slideId}`
+    const url = `${import.meta.env.VITE_API_URL}/v1/votes/${sessionId}/${slideId}`
 
     // Next use the fetch function to call the URL
     const response = await fetch(url, { method: "GET" })
