@@ -11,3 +11,7 @@ body {
 h1 {
     color: light-dark(var(--fastapi-teal), var(--fastapi-teal));
 }
+
+h2 {
+    color: light-dark(var(--fastapi-teal), var(--fastapi-teal));
+}

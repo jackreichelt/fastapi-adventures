@@ -1,0 +1,16 @@
+.voting-page {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+#voting-title {
+    font-size: 2rem;
+}
+
+#slide-title {
+    font-size: 3rem;
+}

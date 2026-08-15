@@ -1,0 +1,7 @@
+@import url("../vars.css");
+
+#voting-options {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

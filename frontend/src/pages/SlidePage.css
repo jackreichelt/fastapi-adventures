@@ -1,9 +1,10 @@
 .slide {
-    width: 100%;
-    justify-content: space-between;
+    height: 100vh;
 
     display: grid;
-    grid: 5fr 1fr / 1fr;
+    grid-template-rows: 6fr 1fr;
+    gap: 4rem;
+    padding: 0 2rem;
 }
 
 .bottomContent {}

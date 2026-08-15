@@ -1,3 +1,5 @@
+import "./VotingOption.css"
+
 import postSendVote from "../api/post-send-vote"
 
 function VotingOption(props) {
@@ -18,11 +20,9 @@ function VotingOption(props) {
     }
 
     return (
-        <div>
-            <button type="button" onClick={handleVote}>
-                {option.name}
-            </button>
-        </div>
+        <button className="voting-option" type="button" onClick={handleVote}>
+            {option.name}
+        </button>
     )
 };
 

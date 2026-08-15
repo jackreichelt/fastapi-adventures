@@ -1,9 +1,10 @@
 @import url("../vars.css");
 
 .pollBar {
-    width: 100%;
     height: 2rem;
-    background-color: light-dark(var(--github-light-grey), var(--light-text));
+    border: 1px;
+    border-style: solid;
+    border-color: light-dark(var(--github-light-grey), var(--github-light-grey));
     border-radius: .5rem;
 }
 
@@ -17,7 +18,7 @@
     p {
         margin: 0;
         padding: 0 .5rem;
-        color: white;
+        color: light-dark(var(--dark-text), var(--light-text));
         font-size: 1.5rem;
     }
 }

@@ -1,3 +1,5 @@
+import "./VotingOptions.css"
+
 import VotingOption from "./VotingOption"
 
 function VotingOptions(props) {
@@ -5,7 +7,7 @@ function VotingOptions(props) {
     const slideId = props.slideId
 
     return (
-        <div>
+        <div id="voting-options">
             {options.map((option, key) => {
                 return <VotingOption key={key} option={option} slideId={slideId} />
             })}

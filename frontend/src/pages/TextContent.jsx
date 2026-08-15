@@ -7,7 +7,7 @@ function TextContent({ slide }) {
     return (
         <div id="comboDiv">
             <h1 className="title">{slide.title}</h1>
-            <div id="contentPane">
+            <div id="textContentPane">
                 <ul className="slideText">
                     {slide.contents.map((bulletPoint, key) => {
                         return (

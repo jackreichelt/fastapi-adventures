@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useWebSocket, { ReadyState } from 'react-use-websocket'
+
 import "./theme.css"
+
+import "./VotingPage.css"
 
 import ConnectionIndicator from "../components/ConnectionIndicator"
 import VotingOptions from "../components/VotingOptions"
 import useSlide from "../hooks/use-get-slide"
+import useGetVote from "../hooks/use-get-vote"
 
 function VotingPage() {
-    const { id } = useParams()
-    const { slide, isLoading, error, pollOptions } = useSlide(id)
+    const audienceId = window.localStorage.getItem("audienceId", null)
+    const sessionId = window.localStorage.getItem("sessionId", null)
+    const { slideId } = useParams()
+    const { slide, isLoading: isSlideLoading, error: slideError, pollOptions } = useSlide(slideId)
+    const { vote, isLoading: isVoteLoading, error: voteError } = useGetVote(audienceId, slideId, sessionId)
 
     const socketUrl = `${import.meta.env.VITE_API_URL}/ws/v1/audience`
     const { lastMessage, readyState } = useWebSocket(socketUrl)
@@ -31,18 +38,22 @@ function VotingPage() {
     }[readyState]
 
 
-    if (isLoading) {
+    if (isSlideLoading || isVoteLoading) {
         return (<p>loading...</p>)
     }
 
-    if (error) {
-        return (<p>{error.message}</p>)
+    if (slideError) {
+        return (<p>{slideError.message}</p>)
+    }
+    if (voteError) {
+        return (<p>{voteError.message}</p>)
     }
 
     return (
-        <div>
+        <div className="voting-page">
             <ConnectionIndicator status={connectionStatus} />
-            <h1>Voting: {slide.title}</h1>
+            <h1 id="voting-title">Voting:</h1>
+            <h2 id="slide-title">{slide.title}</h2>
             <div>
                 <ul>
                     {messages && messages.map((message, key) => {
@@ -54,7 +65,7 @@ function VotingPage() {
                     })}
                 </ul>
             </div>
-            <VotingOptions options={pollOptions} slideId={id} />
+            <VotingOptions options={pollOptions} slideId={slideId} />
         </div>
     )
 }

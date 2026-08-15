@@ -1,0 +1,19 @@
+@import url("../vars.css");
+
+.voting-option {
+    padding: 1rem;
+    border: 0;
+    border-radius: 1rem;
+
+    background-color: var(--fastapi-teal);
+    color: white;
+
+    font-size: 2rem;
+
+    box-shadow: 5px 5px 5px var(--github-dark-grey);
+
+    &:active {
+        box-shadow: 2px 2px 5px var(--github-dark-grey);
+        transform: translateY(2px);
+    }
+}
