@@ -2,7 +2,15 @@
     "services": {
         "frontend": {
             "root": "frontend",
-            "framework": "vite"
+            "framework": "vite",
+            "bindings": [
+                {
+                    "type": "service",
+                    "service": "backend",
+                    "format": "url",
+                    "env": "VITE_API_URL"
+                }
+            ]
         },
         "backend": {
             "root": "backend",
