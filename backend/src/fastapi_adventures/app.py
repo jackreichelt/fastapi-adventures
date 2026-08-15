@@ -1,9 +1,6 @@
-import pathlib
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
 from .routers import presentation_sessions, slide_decks, slides, votes
 from .websockets import audience, presenter
@@ -21,9 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-parent_path = pathlib.Path(__file__).parent.parent
-static_files = StaticFiles(directory=parent_path / "static")
-app.mount("/static", static_files, name="static")
+# parent_path = pathlib.Path(__file__).parent.parent
+# static_files = StaticFiles(directory=parent_path / "fastapi_adventures" / "static")
+# app.mount("/static", static_files, name="static")
 
 
 v1_apis = [
