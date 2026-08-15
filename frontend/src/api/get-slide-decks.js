@@ -1,6 +1,6 @@
 export default async function getSlideDecks() {
     // Create our URL
-    const url = `${import.meta.env.VITE_API_URL}/v1/slide-decks`
+    const url = `${import.meta.env.VITE_API_URL}/api/v1/slide-decks`
 
     // Next use the fetch function to call the URL
     const response = await fetch(url, { method: "GET" })

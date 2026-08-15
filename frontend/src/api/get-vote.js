@@ -1,5 +1,5 @@
 export default async function getVote(audienceId, slideId, sessionId) {
-    const url = `${import.meta.env.VITE_API_URL}/v1/votes/fetch`
+    const url = `${import.meta.env.VITE_API_URL}/api/v1/votes/fetch`
 
     const data = {
         audience_id: audienceId,

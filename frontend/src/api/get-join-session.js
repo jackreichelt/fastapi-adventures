@@ -1,5 +1,5 @@
 export default async function getJoinSession(sessionId, audienceId) {
-    let url = `${import.meta.env.VITE_API_URL}/v1/presentation-session/join/${sessionId}`
+    let url = `${import.meta.env.VITE_API_URL}/api/v1/presentation-session/join/${sessionId}`
     if (audienceId) {
         url += `?audience_id=${audienceId}`
     }

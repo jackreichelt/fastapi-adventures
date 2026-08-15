@@ -3,14 +3,6 @@
         "frontend": {
             "root": "frontend",
             "framework": "vite",
-            "bindings": [
-                {
-                    "type": "service",
-                    "service": "backend",
-                    "format": "url",
-                    "env": "VITE_API_URL"
-                }
-            ]
         },
         "backend": {
             "root": "backend",
@@ -35,6 +27,13 @@
         },
         {
             "source": "/docs",
+            "destination": {
+                "type": "service",
+                "service": "backend"
+            }
+        },
+        {
+            "source": "/openapi.json",
             "destination": {
                 "type": "service",
                 "service": "backend"

@@ -1,5 +1,5 @@
 export default async function postStartSession(first_slide_id) {
-    const url = `${import.meta.env.VITE_API_URL}/v1/presentation-session`
+    const url = `${import.meta.env.VITE_API_URL}/api/v1/presentation-session`
 
     const response = await fetch(url, {
         method: "POST",
