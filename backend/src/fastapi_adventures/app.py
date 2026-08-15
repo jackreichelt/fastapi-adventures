@@ -9,13 +9,13 @@ from .routers import presentation_sessions, slide_decks, slides, votes
 from .websockets import audience, presenter
 from .websockets.connection_manager import get_audience_connections, get_presenter_connections
 
-app = FastAPI(swagger_ui_parameters={"persistAuthorization": True}, docs_url="/")
+app = FastAPI(swagger_ui_parameters={"persistAuthorization": True}, docs_url="/docs")
 
 # Configure the CORs middleware
 # TODO: Work out a better, more restrictive configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://localhost:5173"],
+    allow_origins=["http://localhost:8080", "http://localhost:5173", "https://fastapi-adventures.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -44,6 +44,11 @@ for ws in ws_routers:
 
 
 count = 0
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello from FastAPI on Vercel"}
 
 
 @app.post("/count")
