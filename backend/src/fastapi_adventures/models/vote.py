@@ -35,10 +35,20 @@ class PublicVote(BaseModel):
 
 class CreateVote(BaseModel):
     """
-    Pydantic interface for creating a Slide.
+    Pydantic interface for creating a Vote.
     """
 
     audience_id: str
     option_id: int
+    slide_id: int
+    session_id: int
+
+
+class GetVote(BaseModel):
+    """
+    Pydantic interface for fetching an audience member's Vote.
+    """
+
+    audience_id: str
     slide_id: int
     session_id: int

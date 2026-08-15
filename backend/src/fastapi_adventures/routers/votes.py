@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body
 from sqlalchemy import delete, select
 
 from ..db import get_db
-from ..models.vote import CreateVote, PublicVote, Vote
+from ..models.vote import CreateVote, GetVote, PublicVote, Vote
 from ..websockets.connection_manager import get_presenter_connections
 
 router = APIRouter(
@@ -26,6 +26,28 @@ async def get_votes(
     votes = db.scalars(stmt).all()
 
     return [PublicVote.model_validate(v, from_attributes=True) for v in votes]
+
+
+@router.post("/fetch", response_model=PublicVote | None)
+async def get_vote(
+    db: get_db,
+    vote_data: Annotated[GetVote, Body()],
+):
+    """
+    Fetches a user's vote, if it exists.
+    """
+    stmt = (
+        select(Vote)
+        .where(Vote.audience_id == vote_data.audience_id)
+        .where(Vote.slide_id == vote_data.slide_id)
+        .where(Vote.session_id == vote_data.session_id)
+    )
+    existing_vote = db.scalar(stmt)
+
+    if existing_vote:
+        PublicVote.model_validate(existing_vote, from_attributes=True)
+
+    return None
 
 
 @router.post("", response_model=PublicVote)
