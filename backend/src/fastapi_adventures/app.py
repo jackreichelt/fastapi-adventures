@@ -30,7 +30,7 @@ v1_apis = [
     votes,
 ]
 for api in v1_apis:
-    app.include_router(api.router, prefix="/v1")
+    app.include_router(api.router, prefix="/api/v1")
 
 ws_routers = [
     presenter,
