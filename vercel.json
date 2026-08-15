@@ -19,6 +19,20 @@
             }
         },
         {
+            "source": "/ws(/.*)?",
+            "destination": {
+                "type": "service",
+                "service": "backend"
+            }
+        },
+        {
+            "source": "/docs?",
+            "destination": {
+                "type": "service",
+                "service": "backend"
+            }
+        },
+        {
             "source": "/(.*)",
             "destination": {
                 "type": "service",
